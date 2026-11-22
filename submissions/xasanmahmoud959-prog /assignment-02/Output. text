@@ -1,0 +1,280 @@
+
+
+
+ output for terminal is here
+
+
+=================================================================
+TASK 1: LOWERCASE
+=================================================================
+BEFORE:
+URGENT!!! You have WON a £1,000 gift card. Call 0712345678 NOW!
+
+AFTER:
+urgent!!! you have won a £1,000 gift card. call 0712345678 now!
+
+
+=================================================================
+TASK 2: WHITESPACE NORMALIZATION
+=================================================================
+BEFORE:
+'   The   delivery   was   fast,   and the  packaging   was   great.   '
+
+AFTER:
+'The delivery was fast, and the packaging was great.'
+
+
+=================================================================
+TASK 3: REGEX CLEANING
+=================================================================
+
+PART A: DELETE NON-LETTERS
+BEFORE:
+urgent!!! you have won a £1,000 gift card. call 0712345678 now!
+
+PATTERN:
+[^a-z\s]
+
+AFTER:
+urgent you have won a  gift card call  now
+
+DELETED CHARACTER TYPES:
+['!', ',', '.', '0', '1', '£']
+
+PART B: REPLACE IMPORTANT INFORMATION
+BEFORE:
+urgent!!! you have won a £1,000 gift card. call 0712345678 now!
+
+AFTER:
+urgent! you have won a MONEY gift card. call PHONE_NUMBER now!
+
+
+=================================================================
+TASK 4: TOKENIZATION
+=================================================================
+
+T2 USING split():
+['I', "don't", 'think', 'this', 'jacket', 'is', 'worth', 'the', 'price.', 'Not', 'happy', 'at', 'all', '😞']
+Token count: 14
+
+T2 USING word_tokenize():
+['I', 'do', "n't", 'think', 'this', 'jacket', 'is', 'worth', 'the', 'price', '.', 'Not', 'happy', 'at', 'all', '😞']
+Token count: 16
+
+T4 TOKENS:
+['the', 'delivery', 'was', 'fast', ',', 'and', 'the', 'packaging', 'was', 'great', '.']
+T4 Token count: 11
+T4 Vocabulary size: 10
+Unique tokens:
+[',', '.', 'and', 'delivery', 'fast', 'great', 'packaging', 'the', 'was']
+
+
+=================================================================
+TASK 5: STOPWORDS AND NEGATION
+=================================================================
+
+ORIGINAL TOKENS:
+['i', 'do', "n't", 'think', 'this', 'jacket', 'is', 'worth', 'the', 'price', '.', 'not', 'happy', 'at', 'all', '😞']
+
+AFTER DEFAULT STOPWORD REMOVAL:
+["n't", 'think', 'jacket', 'worth', 'price', '.', 'happy', '😞']
+
+AFTER NEGATION-KEEPING STOPWORD REMOVAL:
+["n't", 'think', 'jacket', 'worth', 'price', '.', 'not', 'happy', '😞']
+
+
+=================================================================
+TASK 6: STEMMING
+=================================================================
+
+STEMMER COMPARISON TABLE
+WORD           PORTER         LANCASTER      SNOWBALL
+------------------------------------------------------------
+connection     connect        connect        connect
+connected      connect        connect        connect
+connecting     connect        connect        connect
+organization   organ          org            organ
+organized      organ          org            organ
+university     univers        univers        univers
+universal      univers        univers        univers
+flies          fli            fli            fli
+wolves         wolv           wolv           wolv
+better         better         bet            better
+ran            ran            ran            ran
+
+WORDS MERGED INTO THE SAME STEM:
+Porter => ['connection', 'connected', 'connecting'] => connect
+Porter => ['organization', 'organized'] => organ
+Porter => ['university', 'universal'] => univers
+Porter => No additional matching pair found
+
+Lancaster => ['connection', 'connected', 'connecting'] => connect
+Lancaster => ['organization', 'organized'] => org
+Lancaster => ['university', 'universal'] => univers
+Lancaster => No additional matching pair found
+
+Snowball => ['connection', 'connected', 'connecting'] => connect
+Snowball => ['organization', 'organized'] => organ
+Snowball => ['university', 'universal'] => univers
+Snowball => No additional matching pair found
+
+STEMS THAT ARE NOT REAL ENGLISH WORDS:
+Porter : organization -> organ
+Porter : organized -> organ
+Porter : university -> univers
+Porter : universal -> univers
+Porter : flies -> fli
+Porter : wolves -> wolv
+
+Lancaster : organization -> org
+Lancaster : organized -> org
+Lancaster : university -> univers
+Lancaster : universal -> univers
+Lancaster : flies -> fli
+Lancaster : wolves -> wolv
+Lancaster : better -> bet
+
+Snowball : organization -> organ
+Snowball : organized -> organ
+Snowball : university -> univers
+Snowball : universal -> univers
+Snowball : flies -> fli
+Snowball : wolves -> wolv
+
+
+=================================================================
+TASK 7: LEMMATIZATION
+=================================================================
+
+LEMMATIZATION COMPARISON
+WORD           DEFAULT        WITH POS HINT       POS
+------------------------------------------------------------
+connection     connection     connection          n
+connected      connected      connect             v
+connecting     connecting     connect             v
+organization   organization   organization         n
+organized      organized      organize            v
+university     university     university           n
+universal      universal      universal            a
+flies          fly            fly                 v
+wolves         wolf           wolf                n
+better         better         good                a
+ran            ran            run                 v
+
+WORDS THAT CHANGED ONLY WITH POS HINT:
+connected : connected -> connect
+connecting : connecting -> connect
+organized : organized -> organize
+better : better -> good
+ran : ran -> run
+
+
+=================================================================
+TASK 8: SENTENCE SPLITTING
+=================================================================
+
+ORIGINAL TEXT:
+Mr. Smith arrived in London on Friday. He met the Apple team at 9 a.m.
+
+SPLIT SENTENCES:
+Sentence 1: Mr. Smith arrived in London on Friday.
+Sentence 2: He met the Apple team at 9 a.m.
+
+Total sentences: 2
+
+
+=================================================================
+TASK 9: POS TAGGING AND NER
+=================================================================
+
+POS TAGGING:
+Mr.             NNP
+Smith           NNP
+arrived         VBD
+in              IN
+London          NNP
+on              IN
+Friday          NNP
+.               .
+He              PRP
+met             VBD
+the             DT
+Apple           NNP
+team            NN
+at              IN
+9               CD
+a.m.            NN
+.               .
+
+NAMED ENTITY TREE:
+[PERSON Mr. Smith] arrived in [GPE London] on [DATE Friday] . He met the [ORGANIZATION Apple] team at 9 a.m. .
+
+DETECTED ENTITIES:
+Entity: Mr. Smith            Label: PERSON
+Entity: London               Label: GPE
+Entity: Friday               Label: DATE
+Entity: Apple                Label: ORGANIZATION
+
+EXPECTED ENTITY CHECK:
+Mr. Smith      Expected: PERSON         Recognized: True
+London         Expected: PLACE          Recognized: True
+Friday         Expected: DAY            Recognized: True
+Apple          Expected: ORGANIZATION   Recognized: True
+
+
+=================================================================
+TASK 10: FULL PREPROCESSING PIPELINE
+=================================================================
+
+-----------------------------------------------------------------
+PIPELINE A: DEFAULT STOPWORDS
+-----------------------------------------------------------------
+
+STEP 1 - LOWERCASE:
+i don't think this jacket is worth the price. not happy at all 😞
+
+STEP 2 - REGEX CLEANING:
+i don't think this jacket is worth the price not happy at all
+
+STEP 3 - TOKENIZATION:
+['i', 'do', "n't", 'think', 'this', 'jacket', 'is', 'worth', 'the', 'price', 'not', 'happy', 'at', 'all']
+
+STEP 4 - STOPWORD REMOVAL:
+["n't", 'think', 'jacket', 'worth', 'price', 'happy']
+
+STEP 5 - LEMMATIZATION:
+["n't", 'think', 'jacket', 'worth', 'price', 'happy']
+
+
+-----------------------------------------------------------------
+PIPELINE B: NEGATION-KEEPING STOPWORDS
+-----------------------------------------------------------------
+
+STEP 1 - LOWERCASE:
+i don't think this jacket is worth the price. not happy at all 😞
+
+STEP 2 - REGEX CLEANING:
+i don't think this jacket is worth the price not happy at all
+
+STEP 3 - TOKENIZATION:
+['i', 'do', "n't", 'think', 'this', 'jacket', 'is', 'worth', 'the', 'price', 'not', 'happy', 'at', 'all']
+
+STEP 4 - STOPWORD REMOVAL:
+["n't", 'think', 'jacket', 'worth', 'price', 'not', 'happy']
+
+STEP 5 - LEMMATIZATION:
+["n't", 'think', 'jacket', 'worth', 'price', 'not', 'happy']
+
+
+=================================================================
+FINAL PIPELINE COMPARISON
+=================================================================
+
+DEFAULT STOPWORDS:
+["n't", 'think', 'jacket', 'worth', 'price', 'happy']
+
+NEGATION-KEEPING STOPWORDS:
+["n't", 'think', 'jacket', 'worth', 'price', 'not', 'happy']
+
+PREPROCESSING PRACTICE COMPLETED!
+=================================================================
