@@ -1,0 +1,159 @@
+
+==============================================================================
+TASK 1 – ONE-HOT ENCODING
+==============================================================================
+Selected vocabulary: ['free', 'win', 'phone', 'cash']
+free: [1, 1, 0, 0, 0]
+win: [1, 1, 0, 0, 0]
+phone: [1, 0, 0, 0, 0]
+cash: [0, 1, 0, 0, 0]
+
+==============================================================================
+TASK 2 – COUNT VECTORIZATION
+==============================================================================
+Vocabulary (alphabetical): ['are', 'before', 'but', 'call', 'cash', 'claim', 'class', 'entry', 'for', 'free', 'good', 'great', 'lecture', 'lunch', 'me', 'meeting', 'not', 'notes', 'now', 'phone', 'please', 'prizes', 'reply', 'send', 'still', 'the', 'to', 'today', 'was', 'we', 'were', 'win']
+Matrix shape: (5, 32)
+Document-term matrix (rows D1-D5; columns in vocabulary order):
+               are     before        but       call       cash      claim      class      entry        for       free       good      great    lecture      lunch         me    meeting        not      notes        now      phone     please     prizes      reply       send      still        the         to      today        was         we       were        win
+D1              0          0          0          0          0          1          0          0          0          1          0          0          0          0          0          0          0          0          1          1          0          0          1          0          0          0          1          0          0          0          0          2
+D2              0          0          0          1          1          0          0          1          0          1          0          0          0          0          0          0          0          0          1          0          0          1          0          0          0          0          0          1          0          0          0          1
+D3              1          0          0          0          0          0          0          0          1          0          0          0          0          1          0          1          0          0          0          0          0          0          0          0          1          0          0          1          0          1          0          0
+D4              0          1          0          0          0          0          1          0          0          0          0          0          1          0          1          0          0          1          0          0          1          0          0          1          0          1          0          0          0          0          0          0
+D5              0          0          1          0          0          0          0          0          0          0          1          1          1          0          0          0          1          1          0          0          0          0          0          0          0          2          0          0          1          0          1          0
+D1 count for 'win': 2
+Vector for 'win free phone': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+Vector for 'phone free win': [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+
+==============================================================================
+TASK 3 – TOKEN COUNTS AND VOCABULARY
+==============================================================================
+D1: tokens=8, token_list=['win', 'free', 'phone', 'now', 'reply', 'win', 'to', 'claim']
+D2: tokens=8, token_list=['free', 'entry', 'win', 'cash', 'prizes', 'today', 'call', 'now']
+D3: tokens=7, token_list=['are', 'we', 'still', 'meeting', 'for', 'lunch', 'today']
+D4: tokens=8, token_list=['please', 'send', 'me', 'the', 'lecture', 'notes', 'before', 'class']
+D5: tokens=10, token_list=['the', 'lecture', 'was', 'not', 'good', 'but', 'the', 'notes', 'were', 'great']
+Total tokens across documents: 41
+Unique vocabulary size: 32
+
+==============================================================================
+TASK 4 – PREPROCESSING
+==============================================================================
+Original text: FREE prizes, TODAY!
+Tokens after default CountVectorizer preprocessing: ['free', 'prizes', 'today']
+Explanation: default preprocessing lowercases text, removes punctuation, and tokenizes words.
+
+==============================================================================
+TASK 5 – VOCABULARY LIMITS
+==============================================================================
+min_df=2 vocabulary: ['free', 'lecture', 'notes', 'now', 'the', 'today', 'win']
+min_df=2 matrix shape: (5, 7)
+max_features=5 vocabulary: ['free', 'lecture', 'now', 'the', 'win']
+max_features=5 matrix shape: (5, 5)
+
+==============================================================================
+TASK 6 – N-GRAMS
+==============================================================================
+ngram_range=(1, 1): vocabulary size=32
+Vocabulary: ['are', 'before', 'but', 'call', 'cash', 'claim', 'class', 'entry', 'for', 'free', 'good', 'great', 'lecture', 'lunch', 'me', 'meeting', 'not', 'notes', 'now', 'phone', 'please', 'prizes', 'reply', 'send', 'still', 'the', 'to', 'today', 'was', 'we', 'were', 'win']
+ngram_range=(1, 2): vocabulary size=67
+Vocabulary: ['are', 'are we', 'before', 'before class', 'but', 'but the', 'call', 'call now', 'cash', 'cash prizes', 'claim', 'class', 'entry', 'entry win', 'for', 'for lunch', 'free', 'free entry', 'free phone', 'good', 'good but', 'great', 'lecture', 'lecture notes', 'lecture was', 'lunch', 'lunch today', 'me', 'me the', 'meeting', 'meeting for', 'not', 'not good', 'notes', 'notes before', 'notes were', 'now', 'now reply', 'phone', 'phone now', 'please', 'please send', 'prizes', 'prizes today', 'reply', 'reply win', 'send', 'send me', 'still', 'still meeting', 'the', 'the lecture', 'the notes', 'to', 'to claim', 'today', 'today call', 'was', 'was not', 'we', 'we still', 'were', 'were great', 'win', 'win cash', 'win free', 'win to']
+ngram_range=(1, 3): vocabulary size=98
+Vocabulary: ['are', 'are we', 'are we still', 'before', 'before class', 'but', 'but the', 'but the notes', 'call', 'call now', 'cash', 'cash prizes', 'cash prizes today', 'claim', 'class', 'entry', 'entry win', 'entry win cash', 'for', 'for lunch', 'for lunch today', 'free', 'free entry', 'free entry win', 'free phone', 'free phone now', 'good', 'good but', 'good but the', 'great', 'lecture', 'lecture notes', 'lecture notes before', 'lecture was', 'lecture was not', 'lunch', 'lunch today', 'me', 'me the', 'me the lecture', 'meeting', 'meeting for', 'meeting for lunch', 'not', 'not good', 'not good but', 'notes', 'notes before', 'notes before class', 'notes were', 'notes were great', 'now', 'now reply', 'now reply win', 'phone', 'phone now', 'phone now reply', 'please', 'please send', 'please send me', 'prizes', 'prizes today', 'prizes today call', 'reply', 'reply win', 'reply win to', 'send', 'send me', 'send me the', 'still', 'still meeting', 'still meeting for', 'the', 'the lecture', 'the lecture notes', 'the lecture was', 'the notes', 'the notes were', 'to', 'to claim', 'today', 'today call', 'today call now', 'was', 'was not', 'was not good', 'we', 'we still', 'we still meeting', 'were', 'were great', 'win', 'win cash', 'win cash prizes', 'win free', 'win free phone', 'win to', 'win to claim']
+
+==============================================================================
+TASK 7 – TF-IDF
+==============================================================================
+TF-IDF vocabulary: ['are', 'before', 'but', 'call', 'cash', 'claim', 'class', 'entry', 'for', 'free', 'good', 'great', 'lecture', 'lunch', 'me', 'meeting', 'not', 'notes', 'now', 'phone', 'please', 'prizes', 'reply', 'send', 'still', 'the', 'to', 'today', 'was', 'we', 'were', 'win']
+TF-IDF matrix (rows D1-D5; columns in vocabulary order):
+               are     before        but       call       cash      claim      class      entry        for       free       good      great    lecture      lunch         me    meeting        not      notes        now      phone     please     prizes      reply       send      still        the         to      today        was         we       were        win
+D1         0.0000     0.0000     0.0000     0.0000     0.0000     0.3557     0.0000     0.0000     0.0000     0.2869     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.2869     0.3557     0.0000     0.0000     0.3557     0.0000     0.0000     0.0000     0.3557     0.0000     0.0000     0.0000     0.0000     0.5739
+D2         0.0000     0.0000     0.0000     0.3891     0.3891     0.0000     0.0000     0.3891     0.0000     0.3140     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.3140     0.0000     0.0000     0.3891     0.0000     0.0000     0.0000     0.0000     0.0000     0.3140     0.0000     0.0000     0.0000     0.3140
+D3         0.3878     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.3878     0.0000     0.0000     0.0000     0.0000     0.3878     0.0000     0.3878     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.3878     0.0000     0.0000     0.3128     0.0000     0.3878     0.0000     0.0000
+D4         0.0000     0.3792     0.0000     0.0000     0.0000     0.0000     0.3792     0.0000     0.0000     0.0000     0.0000     0.0000     0.3060     0.0000     0.3792     0.0000     0.0000     0.3060     0.0000     0.0000     0.3792     0.0000     0.0000     0.3792     0.0000     0.3060     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000
+D5         0.0000     0.0000     0.3177     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.3177     0.3177     0.2563     0.0000     0.0000     0.0000     0.3177     0.2563     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000     0.5127     0.0000     0.0000     0.3177     0.0000     0.3177     0.0000
+D2: count and TF-IDF weight for every vocabulary word:
+call: count=1, tfidf=0.38914146
+cash: count=1, tfidf=0.38914146
+entry: count=1, tfidf=0.38914146
+free: count=1, tfidf=0.31395688
+now: count=1, tfidf=0.31395688
+prizes: count=1, tfidf=0.38914146
+today: count=1, tfidf=0.31395688
+win: count=1, tfidf=0.31395688
+
+==============================================================================
+TASK 8 – HAND CALCULATIONS FOR CASH AND TODAY
+==============================================================================
+D2 tokens as CountVectorizer sees them: ['free', 'entry', 'win', 'cash', 'prizes', 'today', 'call', 'now']
+D2 token count: 8
+cash:
+  D2 count (vectorizer token count): 1
+  D2 total tokens: 8
+  Raw-count TF: 1
+  Normalized TF: 1/8 = 0.12500000
+  DF from count matrix: 1
+  Textbook IDF: ln(5/1) = 1.60943791
+  Textbook TF-IDF using raw-count TF: 1.60943791
+  Textbook TF-IDF using normalized TF: 0.20117974
+  scikit-learn D2 TF-IDF (smoothed IDF + L2 norm): 0.38914146
+today:
+  D2 count (vectorizer token count): 1
+  D2 total tokens: 8
+  Raw-count TF: 1
+  Normalized TF: 1/8 = 0.12500000
+  DF from count matrix: 2
+  Textbook IDF: ln(5/2) = 0.91629073
+  Textbook TF-IDF using raw-count TF: 0.91629073
+  Textbook TF-IDF using normalized TF: 0.11453634
+  scikit-learn D2 TF-IDF (smoothed IDF + L2 norm): 0.31395688
+Ranking by textbook hand calculation: cash > today
+Ranking by scikit-learn: cash > today
+Do the rankings match? Yes.
+
+==============================================================================
+TASK 9 – SPARSE MATRIX STATISTICS
+==============================================================================
+Matrix shape: (5, 32)
+Total cells: 160
+Non-zero cells: 39
+Zero cells: 121
+Percentage of zeros: 75.62%
+
+==============================================================================
+TASK 10 – FIT AND TRANSFORM / OUT-OF-VOCABULARY
+==============================================================================
+Training vocabulary: ['are', 'before', 'call', 'cash', 'claim', 'class', 'entry', 'for', 'free', 'lecture', 'lunch', 'me', 'meeting', 'notes', 'now', 'phone', 'please', 'prizes', 'reply', 'send', 'still', 'the', 'to', 'today', 'we', 'win']
+N1 text: Claim your free prize now
+N1 vector: [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+N1 tokens: ['claim', 'your', 'free', 'prize', 'now']
+N1 out-of-vocabulary words: ['your', 'prize']
+N2 text: Is the lunch meeting moved to tomorrow?
+N2 vector: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0]
+N2 tokens: ['is', 'the', 'lunch', 'meeting', 'moved', 'to', 'tomorrow']
+N2 out-of-vocabulary words: ['is', 'moved', 'tomorrow']
+Why is 'prize' unknown when D2 contains 'prizes'? Because CountVectorizer treats them as different exact tokens; it does not automatically reduce words to their root form.
+A stemming or lemmatization step from preprocessing can map 'prizes' and 'prize' to a shared form.
+
+==============================================================================
+TASK 11 – DATA LEAKAGE
+==============================================================================
+Vocabulary fitted on D1-D4 only: ['are', 'before', 'call', 'cash', 'claim', 'class', 'entry', 'for', 'free', 'lecture', 'lunch', 'me', 'meeting', 'notes', 'now', 'phone', 'please', 'prizes', 'reply', 'send', 'still', 'the', 'to', 'today', 'we', 'win']
+Vocabulary fitted on D1-D4 + N1 + N2: ['are', 'before', 'call', 'cash', 'claim', 'class', 'entry', 'for', 'free', 'is', 'lecture', 'lunch', 'me', 'meeting', 'moved', 'notes', 'now', 'phone', 'please', 'prize', 'prizes', 'reply', 'send', 'still', 'the', 'to', 'today', 'tomorrow', 'we', 'win', 'your']
+Words leaked from test set into vocabulary: ['is', 'moved', 'prize', 'tomorrow', 'your']
+Explanation: fitting on test documents allows test-set information to influence the learned vocabulary before evaluation.
+
+==============================================================================
+TASK 12 – COSINE SIMILARITY AND MEANING
+==============================================================================
+Review vocabulary: ['delicious', 'food', 'tasty', 'terrible', 'the', 'was']
+Review vectors (R1-R3):
+R1: [0, 1, 1, 0, 1, 1]
+R2: [1, 1, 0, 0, 1, 1]
+R3: [0, 1, 0, 1, 1, 1]
+Cosine similarity matrix (rows/columns R1, R2, R3):
+1.000000 0.750000 0.750000
+0.750000 1.000000 0.750000
+0.750000 0.750000 1.000000
+R1 vs R2: 0.750000
+R1 vs R3: 0.750000
+Answer: No. R1 is not more similar to R2 than to R3 according to Bag of Words cosine similarity. Both pairs share 'the' and 'food'; the vectorizer does not know that 'tasty' and 'delicious' have similar meanings or that 'terrible' has an opposite meaning.
